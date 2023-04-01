@@ -31,10 +31,14 @@ function addDot(count) {
 //We call the function and select the first dot when the page loads
 window.onload = function() {
 
+	//Show function to add dot(s) on page loads
 	addDot(countSlide);
+
+	//Show select the first dot and image on page loads
 	let firstDotClass = document.querySelector(".dot");
 	firstDotClass.classList.add("dot_selected");
 
+	//The carousel will automatically display the next image every 4 seconds on page loads
 	setInterval(showNext, 4000);
 }
 
