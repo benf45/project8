@@ -19,8 +19,8 @@ const slides = [
 
 const countSlide = slides.length;
 
-//Function to add dot(s)
-function addDot(count) {
+//Function to create dot(s)
+function createDot(count) {
 	
 	for (i = 1; i <= count; i++) { 
 		//We append new class "dot" in class "dots"
@@ -31,19 +31,47 @@ function addDot(count) {
 //We call the function and select the first dot when the page loads
 window.onload = function() {
 
-	//Show function to add dot(s) on page loads
-	addDot(countSlide);
+	//Show function to create dot(s) on page loads
+	createDot(countSlide);
 
 	//Show select the first dot and image on page loads
 	let firstDotClass = document.querySelector(".dot");
 	firstDotClass.classList.add("dot_selected");
 
 	//The carousel will automatically display the next image every 4 seconds on page loads
-	setInterval(showNext, 4000);
+	intervalCarrouselId = setInterval(showNext, 4000);
 }
 
 const prevButton = document.querySelector(".arrow_left_img");
 const nextButton = document.querySelector(".arrow_right_img");
+
+//Next event click button
+nextButton.addEventListener("click", () => {
+
+	//We clear the interval 
+	clearInterval(intervalCarrouselId);
+
+    //We show the next image
+	showNext();
+
+	//We add a new interval 
+	intervalCarrouselId = setInterval(showNext, 4000);
+
+});
+
+//Previous event click button
+prevButton.addEventListener("click", () => {
+	
+	//We clear the interval  that run the carrousel automatically
+	clearInterval(intervalCarrouselId);
+
+	//We show the prev image
+	showPrev();
+
+	//We add a new interval 
+	intervalCarrouselId = setInterval(showNext, 4000);
+
+});
 
 //Function to show the previous image
 function showPrev() {
@@ -133,16 +161,3 @@ function showNext() {
 	document.querySelector('#banner p').innerHTML = tagline;
 }
 
-//Next event click button
-nextButton.addEventListener("click", () => {
-
-    showNext();
-
-});
-
-//Previous event click button
-prevButton.addEventListener("click", () => {
-
-	showPrev();
-
-});
